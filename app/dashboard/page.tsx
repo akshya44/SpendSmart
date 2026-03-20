@@ -71,7 +71,7 @@ export default function DashboardPage() {
 
       // Category breakdown
       const catMap: Record<string, { value: number; color: string }> = {};
-      monthExpenses?.forEach((e: { amount: number; categories: { name: string; icon?: string; color?: string } | null }) => {
+      monthExpenses?.forEach((e: any) => {
         const catName = e.categories?.name ?? 'Other';
         const catColor = e.categories?.color ?? CATEGORY_COLORS['Other'];
         if (!catMap[catName]) catMap[catName] = { value: 0, color: catColor };
@@ -107,7 +107,7 @@ export default function DashboardPage() {
         .eq('user_id', user.id)
         .order('date', { ascending: false })
         .limit(5);
-      setRecentExpenses((recent as RecentExpense[]) ?? []);
+      setRecentExpenses((recent as unknown as RecentExpense[]) ?? []);
       setLoading(false);
     };
     fetchData();

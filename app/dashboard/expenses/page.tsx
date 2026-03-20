@@ -40,7 +40,7 @@ export default function ExpensesPage() {
       .select('id, amount, note, date, category_id, categories(name, icon, color)')
       .eq('user_id', user.id)
       .order('date', { ascending: false });
-    setExpenses((data as Expense[]) ?? []);
+    setExpenses((data as unknown as Expense[]) ?? []);
     const { data: cats } = await supabase.from('categories').select('id, name, icon, color').order('name');
     setCategories(cats ?? []);
     setLoading(false);
