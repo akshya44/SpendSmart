@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f1117;
+  --surface: #1a1d27;
+  --card: #1e2132;
+  --border: #2a2f45;
+  --accent: #22c55e;
+  --accent-dark: #16a34a;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 3px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .card {
+    @apply bg-card border border-border rounded-2xl p-6;
+  }
+
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  .btn-secondary {
+    @apply bg-surface hover:bg-border text-text-primary font-medium px-5 py-2 rounded-xl border border-border transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-danger/10 hover:bg-danger/20 text-danger font-medium px-4 py-1.5 rounded-lg border border-danger/20 transition-all duration-200;
+  }
+
+  .input {
+    @apply bg-surface border border-border text-text-primary rounded-xl px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-150 placeholder:text-text-muted;
+  }
+
+  .select {
+    @apply bg-surface border border-border text-text-primary rounded-xl px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-150;
+  }
+
+  .label {
+    @apply text-text-secondary text-sm font-medium mb-1.5 block;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .table-row-hover {
+    @apply hover:bg-surface/50 transition-colors duration-100;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:text-text-primary hover:bg-surface transition-all duration-150 font-medium;
+  }
+
+  .sidebar-link-active {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-accent bg-accent/10 font-semibold;
+  }
+
+  .summary-card {
+    @apply card flex items-start justify-between;
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+  }
+}
+
+/* Progress bar animation */
+@keyframes fill-bar {
+  from { width: 0%; }
+  to { width: var(--bar-width); }
+}
+
+.progress-bar {
+  animation: fill-bar 0.8s ease-out forwards;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Pulse glow for over-budget warning */
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  50% { box-shadow: 0 0 12px 2px rgba(239, 68, 68, 0.3); }
+}
+
+.pulse-danger {
+  animation: pulse-red 2s infinite;
+}
